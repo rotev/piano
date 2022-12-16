@@ -55,7 +55,11 @@ And then I don't feel so bad`.substring(1)
     <div>
       <h1>My Favorite Things</h1>
 
-      <Chord />
+      <Chord name="B" />
+      <br/>
+      <Chord name="C" />
+      <br/>
+      <Chord name="D" />
       <br/><br/><br/><br/><br/>
       <div dangerouslySetInnerHTML={{__html: disp}}></div>
     </div>
