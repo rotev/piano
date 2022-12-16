@@ -3,6 +3,9 @@ import chords from './chords.json'
 
 export default function({name}) {
   
+  name = name.split("/")[0]
+  name = name.split(" ")[0]
+
   if (!chords[name]) {
     return (
       <div className={styles.missingChord}>
