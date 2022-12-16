@@ -1,14 +1,58 @@
 {
+  "A": {
+    "threeTwoThree": true,
+    "selectedKeys": [4,9,11]
+  },
+  "Am": {
+    "threeTwoThree": true,
+    "selectedKeys": [4,8,11]
+  },
   "B": {
     "threeTwoThree": true,
     "selectedKeys": [6,10,13]
+  },
+  "B7": {
+    "threeTwoThree": true,
+    "selectedKeys": [6,10,13,17]
   },
   "C": {
     "threeTwoThree": false,
     "selectedKeys": [0,4,7]
   },
+  "Cm": {
+    "threeTwoThree": false,
+    "selectedKeys": [0,3,7]
+  },
+  "Cmaj7": {
+    "threeTwoThree": false,
+    "selectedKeys": [0,4,7,11]
+  },
+  "Cm7": {
+    "threeTwoThree": false,
+    "selectedKeys": [0,3,7,10]
+  },
   "D": {
     "threeTwoThree": false,
+    "selectedKeys": [2,6,9]
+  },
+  "D7": {
+    "threeTwoThree": false,
+    "selectedKeys": [2,6,9, 13]
+  },
+  "E": {
+    "threeTwoThree": true,
+    "selectedKeys": [11,15,18]
+  },
+  "Em": {
+    "threeTwoThree": true,
+    "selectedKeys": [11,14,18]
+  },
+  "F#m7": {
+    "threeTwoThree": true,
+    "selectedKeys": [1,4,8,11]
+  },
+  "G": {
+    "threeTwoThree": true,
     "selectedKeys": [2,6,9]
   }
 }
