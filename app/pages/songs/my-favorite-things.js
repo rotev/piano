@@ -1,4 +1,5 @@
 import ChordSheetJS from 'chordsheetjs'
+import Chord from 'components/Chord'
 
 const Song = () => {
 
@@ -54,6 +55,8 @@ And then I don't feel so bad`.substring(1)
     <div>
       <h1>My Favorite Things</h1>
 
+      <Chord />
+      <br/><br/><br/><br/><br/>
       <div dangerouslySetInnerHTML={{__html: disp}}></div>
     </div>
   )
