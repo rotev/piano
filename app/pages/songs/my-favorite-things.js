@@ -10,7 +10,7 @@ Cmaj7
 Bright copper kettles and warm woolen mittens
 Am          D7       G            C
 Brown paper packages tied up with strings
-G           C         F#m7-5   B7
+G           C         F#m7     B7
 These are a few of my favorite things
  
 
@@ -20,7 +20,7 @@ Cmaj7
 Doorbells and sleigh bells and schnitzel with noodles
 Am          D7       G            C
 Wild geese that fly with the moon on their wings
-G           C         F#m7-5   B7
+G           C         F#m7     B7
 These are a few of my favorite things
  
 
@@ -30,7 +30,7 @@ A
 Snowflakes that stay on my nose and eyelashes
 Am          D7       G            C
 Silver white winters that melt into springs
-G           C         F#m7-5   B7
+G           C         F#m7     B7
 These are a few of my favorite things
  
 
@@ -51,19 +51,71 @@ And then I don't feel so bad`.substring(1)
   const formatter = new ChordSheetJS.HtmlTableFormatter()
   const disp = formatter.format(song)
 
+  function renderSong(song) {
+    return (
+      <div className="chord-sheet">
+        { song.bodyParagraphs.map(renderParagraph) }
+      </div>
+    )
+  }
+
+  function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }
+
+  function renderParagraph(p, i) {
+    const chords = p.lines
+      .map(l => l.items.map(item => item.chords))
+      .flat()
+      .filter(chord => chord !== "")
+      .filter(onlyUnique)
+
+    return (
+      <div key={i} className="paragraph">
+        <div className="lines">
+          { p.lines.map(renderLine) }
+        </div>
+        <div className="visualChords">
+          { chords.map((chord, i) => <Chord key={i} name={chord} />) }
+        </div>
+      </div>
+    )
+  }
+
+  function renderLine(l,  i) {
+    return (
+      <table key={i} className="row">
+        <tbody>
+          <tr>
+            {
+              l.items.map((item, i) => {
+                return (
+                  <td key={i} className="chord">{item.chords}</td>
+                )
+              })
+            }
+          </tr>
+          <tr>
+            {
+              l.items.map((item, i) => {
+                return (
+                  <td key={i} class="lyrics">{item.lyrics}</td>
+                )
+              })
+            }
+          </tr>
+          
+        </tbody>
+      </table>
+    )
+  }
+
   return (
     <div>
       <h1>My Favorite Things</h1>
 
+      { renderSong(song) }
       <Chord name="E" />
-      <Chord name="Em" />
-      <Chord name="Am" />
-      <Chord name="D7" />
-      <Chord name="G" />
-      <Chord name="F#m7" />
-      <Chord name="B7" />
-      <br/><br/><br/><br/><br/>
-      <div dangerouslySetInnerHTML={{__html: disp}}></div>
     </div>
   )
 }

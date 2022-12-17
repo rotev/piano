@@ -1,5 +1,12 @@
 .chord-sheet {
   .paragraph {
     margin-bottom: 2em;
+    display: flex;
+    
+    .visualChords {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+    }
   }
 }
