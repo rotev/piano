@@ -26,7 +26,7 @@ export default function({name}) {
     const selectedClass = selected ? styles.selected : ""
 
     return (
-      <div className={`${styles.key} ${colorClass} ${selectedClass}`}></div>
+      <div key={index} className={`${styles.key} ${colorClass} ${selectedClass}`}></div>
     )
   }
 

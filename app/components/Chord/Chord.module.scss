@@ -21,7 +21,7 @@ $dot-size: $key-width / 2.5;
     &.selected {
       display: flex;
       flex-direction: column;
-      justify-content: end;
+      justify-content: flex-end;
       align-items: center;
 
       &::before {
