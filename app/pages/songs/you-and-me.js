@@ -12,9 +12,11 @@ Em B7          G      D          G
 אמרו את זה קודם לפני זה לא משנה   
  E       B7     A    Em
 אני ואתה  נשנה את העולם
+
 מעבר:
 E A Abm F#m E E A Abm F#m Em
 המשך מעבר כמו הפתיחה
+
 Em       B7     A    Em
 אני ואתה  נשנה את העולם
 G D Em         B7      A    Em
@@ -23,6 +25,7 @@ B7          G       D          G
 אמרו את זה קודם  לפני זה לא משנה
 Em       B7     A    Em
 אני ואתה  נשנה את העולם
+
 מעבר:
 E A Abm F#m E E A Abm F#m Em
 מעבר:
@@ -38,8 +41,7 @@ Em Em Em Em`.substring(1)
   const parser = new ChordSheetJS.ChordsOverWordsParser()
   const song = parser.parse(chordSheet)
 
-  const formatter = new ChordSheetJS.HtmlTableFormatter()
-  const disp = formatter.format(song)
+  const displayedChords = []
 
   function renderSong(song) {
     return (
@@ -53,12 +55,19 @@ Em Em Em Em`.substring(1)
     return self.indexOf(value) === index;
   }
 
+  function notDisplayed(value) {
+    return displayedChords.indexOf(value) === -1;
+  }
+
   function renderParagraph(p, i) {
     const chords = p.lines
       .map(l => l.items.map(item => item.chords))
       .flat()
       .filter(chord => chord !== "")
       .filter(onlyUnique)
+      .filter(notDisplayed)
+
+    displayedChords.push(...chords)
 
     return (
       <div key={i} className="paragraph">

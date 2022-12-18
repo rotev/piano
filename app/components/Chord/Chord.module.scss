@@ -4,17 +4,19 @@ $number-of-white-keys: 11;
 $key-width: $width / $number-of-white-keys;
 $dot-size: $key-width / 2.5;
 
+.chordWithName {
+  header {
+    text-align: center;
+  }
+
+  margin: 5px;
+}
+
 .chord {
   display: flex;
   width: $width;
   height: $height;
   border: 1px solid  black;
-}
-
-.chordWithName {
-  header {
-    text-align: center;
-  }
 }
 
 .key {
