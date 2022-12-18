@@ -1,0 +1,3 @@
+[submodule "ChordSheetJS"]
+	path = ChordSheetJS
+	url = https://github.com/rotev/ChordSheetJS

@@ -119,10 +119,8 @@ caniuse-lite@^1.0.30001406:
   optionalDependencies:
     fsevents "~2.3.2"
 
-chordsheetjs@^7.12.0:
+"chordsheetjs@file:../ChordSheetJS":
   version "7.12.0"
-  resolved "https://registry.yarnpkg.com/chordsheetjs/-/chordsheetjs-7.12.0.tgz#5fbae81b480933d7e0c9bf24b5a12e21bb9bdb3b"
-  integrity sha512-6n3bVfejpl9vkknyAYaU2EHGWy12xSOYBzKbGKcJcD8XKlYmFhMpcaWvdg1vb02RsZF3usEMb6S23g8RO3Elxw==
   dependencies:
     lodash.get "^4.4.2"
 
@@ -149,6 +147,11 @@ glob-parent@~5.1.2:
   integrity sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==
   dependencies:
     is-glob "^4.0.1"
+
+husky@^8.0.2:
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/husky/-/husky-8.0.2.tgz#5816a60db02650f1f22c8b69b928fd6bcd77a236"
+  integrity sha512-Tkv80jtvbnkK3mYWxPZePGFpQ/tT3HNSs/sasF9P2YfkMezDl3ON37YN6jUUI4eTg5LcyVynlb6r4eyvOmspvg==
 
 immutable@^4.0.0:
   version "4.1.0"
