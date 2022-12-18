@@ -11,6 +11,12 @@ $dot-size: $key-width / 2.5;
   border: 1px solid  black;
 }
 
+.chordWithName {
+  header {
+    text-align: center;
+  }
+}
+
 .key {
   width: $key-width;
   
