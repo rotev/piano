@@ -4,46 +4,36 @@ import Chord from 'components/Chord'
 const Song = () => {
 
   const chordSheet = `
-Em  
-Raindrops on roses and whiskers on kittens
-Cmaj7
-Bright copper kettles and warm woolen mittens
-Am          D7       G            C
-Brown paper packages tied up with strings
-G           C         F#m7     B7
-These are a few of my favorite things
- 
+  Em     B7    A    Em
+אני ואתה ננסה מהתחלה
+G D Em         B7        A         
+יהיה לנו רע  אין דבר זה לא נורא    
+Em B7          G      D          G
+אמרו את זה קודם לפני זה לא משנה   
+ E       B7     A    Em
+אני ואתה  נשנה את העולם
+מעבר:
+E A Abm F#m E E A Abm F#m Em
+המשך מעבר כמו הפתיחה
+Em       B7     A    Em
+אני ואתה  נשנה את העולם
+G D Em         B7      A    Em
+אני ואתה אז יבואו כבר כולם    
+B7          G       D          G
+אמרו את זה קודם  לפני זה לא משנה
+Em       B7     A    Em
+אני ואתה  נשנה את העולם
+מעבר:
+E A Abm F#m E E A Abm F#m Em
+מעבר:
+Em Em Em Em
 
-Em
-Cream colored ponies and crisp apple streudels
-Cmaj7
-Doorbells and sleigh bells and schnitzel with noodles
-Am          D7       G            C
-Wild geese that fly with the moon on their wings
-G           C         F#m7     B7
-These are a few of my favorite things
- 
+המשך מעבר כמו הפתיחה x2
+מעבר:
+Em Em Em Em
 
-E
-Girls in white dresses with blue satin sashes
-A
-Snowflakes that stay on my nose and eyelashes
-Am          D7       G            C
-Silver white winters that melt into springs
-G           C         F#m7     B7
-These are a few of my favorite things
- 
-
-Em
-When the dog bites
-Am       B/Eb
-When the bee stings
-Em               C
-When I'm feeling sad
-  C      Am          G        C
-I simply remember my favorite things
-    Am           D7      G
-And then I don't feel so bad`.substring(1)
+סיום:
+Em Em Em Em`.substring(1)
 
   const parser = new ChordSheetJS.ChordsOverWordsParser()
   const song = parser.parse(chordSheet)
@@ -53,7 +43,7 @@ And then I don't feel so bad`.substring(1)
 
   function renderSong(song) {
     return (
-      <div className="chord-sheet">
+      <div className="chord-sheet rtl">
         { song.bodyParagraphs.map(renderParagraph) }
       </div>
     )
@@ -112,7 +102,7 @@ And then I don't feel so bad`.substring(1)
 
   return (
     <div>
-      <h1>My Favorite Things</h1>
+      <h1>אני ואתה</h1>
 
       { renderSong(song) }
       <Chord name="E" />

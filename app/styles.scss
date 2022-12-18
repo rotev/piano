@@ -9,4 +9,8 @@
       justify-content: space-evenly;
     }
   }
+
+  &.rtl  {
+    direction: rtl;
+  }
 }
