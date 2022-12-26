@@ -1,8 +1,9 @@
 import ChordSheetJS from 'chordsheetjs'
+import classNames from 'classnames'
 import Chord from 'components/Chord'
 import styles from './Song.module.scss'
 
-export default function({chordSheet}) {
+export default function Song({title, chordSheet, rtl}) {
 
   const parser = new ChordSheetJS.ChordsOverWordsParser()
   const song = parser.parse(chordSheet)
@@ -12,7 +13,7 @@ export default function({chordSheet}) {
 
   function renderSong(song) {
     return (
-      <div className="chord-sheet">
+      <div className={classNames(styles.chordSheet, {[styles.rtl]: rtl} )}>
         { song.bodyParagraphs.map(renderParagraph) }
       </div>
     )
@@ -30,11 +31,11 @@ export default function({chordSheet}) {
       .filter(onlyUnique)
 
     return (
-      <div key={i} className="paragraph">
-        <div className="lines">
+      <div key={i} className={styles.paragraph}>
+        <div className={styles.lines}>
           { p.lines.map(renderLine) }
         </div>
-        <div className="visualChords">
+        <div className={styles.visualChords}>
           { chords.map((chord, i) => <Chord key={i} name={chord} />) }
         </div>
       </div>
@@ -43,13 +44,13 @@ export default function({chordSheet}) {
 
   function renderLine(l,  i) {
     return (
-      <table key={i} className="row">
+      <table key={i} className={styles.row}>
         <tbody>
           <tr>
             {
               l.items.map((item, i) => {
                 return (
-                  <td key={i} className="chord">{item.chords}</td>
+                  <td key={i} className={styles.chord}>{item.chords}</td>
                 )
               })
             }
@@ -58,7 +59,7 @@ export default function({chordSheet}) {
             {
               l.items.map((item, i) => {
                 return (
-                  <td key={i} className="lyrics">{item.lyrics}</td>
+                  <td key={i} className={styles.lyrics}>{item.lyrics}</td>
                 )
               })
             }
@@ -71,10 +72,14 @@ export default function({chordSheet}) {
 
   return (
     <div className={styles.song}>
-      <h1>My Favorite Things</h1>
+      <h1>{title}</h1>
 
       { renderSong(song) }
       <Chord name="E" />
     </div>
   )
+}
+
+Song.defaultProps = {
+  rtl: false
 }

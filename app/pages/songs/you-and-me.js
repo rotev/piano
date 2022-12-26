@@ -2,6 +2,8 @@ import Song from 'components/Song'
 
 export default () => {
 
+  const title = "אני ואתה"
+
   const chordSheet = `
   Em     B7    A    Em
 אני ואתה ננסה מהתחלה
@@ -38,6 +40,6 @@ Em Em Em Em
 Em Em Em Em`.substring(1)
 
   return (
-    <Song chordSheet={chordSheet} />
+    <Song title={title} chordSheet={chordSheet} rtl={true} />
   )
 }

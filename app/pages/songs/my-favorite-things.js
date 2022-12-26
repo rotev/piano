@@ -2,6 +2,8 @@ import Song from 'components/Song'
 
 export default () => {
 
+  const title = "My Favorite Things"
+
   const chordSheet = `
 Em  
 Raindrops on roses and whiskers on kittens
@@ -45,6 +47,6 @@ I simply remember my favorite things
 And then I don't feel so bad`.substring(1)
 
   return (
-    <Song chordSheet={chordSheet} />
+    <Song title={title} chordSheet={chordSheet} />
   )
 }

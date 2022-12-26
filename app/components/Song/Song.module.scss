@@ -1,3 +1,21 @@
 .song {
-  
+
+  .chordSheet {
+    
+    .paragraph {
+      margin-bottom: 2em;
+      display: flex;
+      
+      .visualChords {
+        direction: ltr;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+      }
+    }
+
+    &.rtl  {
+      direction: rtl;
+    }
+  }
 }
