@@ -1,7 +1,8 @@
-import ChordSheetJS from 'chordsheetjs'
-import Chord from 'components/Chord'
+import Song from 'components/Song'
 
-const Song = () => {
+export default () => {
+
+  const title = "My Favorite Things"
 
   const chordSheet = `
 Em  
@@ -10,7 +11,7 @@ Cmaj7
 Bright copper kettles and warm woolen mittens
 Am          D7       G            C
 Brown paper packages tied up with strings
-G           C         F#m7-5   B7
+G           C         F#m7     B7
 These are a few of my favorite things
  
 
@@ -20,7 +21,7 @@ Cmaj7
 Doorbells and sleigh bells and schnitzel with noodles
 Am          D7       G            C
 Wild geese that fly with the moon on their wings
-G           C         F#m7-5   B7
+G           C         F#m7     B7
 These are a few of my favorite things
  
 
@@ -30,7 +31,7 @@ A
 Snowflakes that stay on my nose and eyelashes
 Am          D7       G            C
 Silver white winters that melt into springs
-G           C         F#m7-5   B7
+G           C         F#m7     B7
 These are a few of my favorite things
  
 
@@ -45,27 +46,7 @@ I simply remember my favorite things
     Am           D7      G
 And then I don't feel so bad`.substring(1)
 
-  const parser = new ChordSheetJS.ChordsOverWordsParser()
-  const song = parser.parse(chordSheet)
-
-  const formatter = new ChordSheetJS.HtmlTableFormatter()
-  const disp = formatter.format(song)
-
   return (
-    <div>
-      <h1>My Favorite Things</h1>
-
-      <Chord name="E" />
-      <Chord name="Em" />
-      <Chord name="Am" />
-      <Chord name="D7" />
-      <Chord name="G" />
-      <Chord name="F#m7" />
-      <Chord name="B7" />
-      <br/><br/><br/><br/><br/>
-      <div dangerouslySetInnerHTML={{__html: disp}}></div>
-    </div>
+    <Song title={title} chordSheet={chordSheet} />
   )
 }
-
-export default Song

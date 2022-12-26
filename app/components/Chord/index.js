@@ -26,7 +26,7 @@ export default function({name}) {
     const selectedClass = selected ? styles.selected : ""
 
     return (
-      <div className={`${styles.key} ${colorClass} ${selectedClass}`}></div>
+      <div key={index} className={`${styles.key} ${colorClass} ${selectedClass}`}></div>
     )
   }
 
@@ -34,10 +34,13 @@ export default function({name}) {
     const numberOfKeys = 11 + 8
 
     return (
-      <div className={styles.chord}>
-        {
-          [...Array(numberOfKeys)].map((_, i) => renderKey(true, i))
-        }
+      <div className={styles.chordWithName}>
+        <header>{name}</header>
+        <div className={styles.chord}>
+          {
+            [...Array(numberOfKeys)].map((_, i) => renderKey(true, i))
+          }
+        </div>
       </div>
     )
   }
@@ -46,10 +49,13 @@ export default function({name}) {
     const numberOfKeys = 11 + 7
 
     return (
-      <div className={styles.chord}>
-        {
-          [...Array(numberOfKeys)].map((_, i) => renderKey(false, i))
-        }
+      <div className={styles.chordWithName}>
+        <header>{name}</header>
+        <div className={styles.chord}>
+          {
+            [...Array(numberOfKeys)].map((_, i) => renderKey(false, i))
+          }
+        </div>
       </div>
     )
   }
