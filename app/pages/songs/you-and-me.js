@@ -1,7 +1,6 @@
-import ChordSheetJS from 'chordsheetjs'
-import Chord from 'components/Chord'
+import Song from 'components/Song'
 
-const Song = () => {
+export default () => {
 
   const chordSheet = `
   Em     B7    A    Em
@@ -38,85 +37,7 @@ Em Em Em Em
 סיום:
 Em Em Em Em`.substring(1)
 
-  const parser = new ChordSheetJS.ChordsOverWordsParser()
-  const song = parser.parse(chordSheet)
-
-  const displayedChords = []
-
-  function renderSong(song) {
-    return (
-      <div className="chord-sheet rtl">
-        { song.bodyParagraphs.map(renderParagraph) }
-      </div>
-    )
-  }
-
-  function onlyUnique(value, index, self) {
-    return self.indexOf(value) === index;
-  }
-
-  function notDisplayed(value) {
-    return displayedChords.indexOf(value) === -1;
-  }
-
-  function renderParagraph(p, i) {
-    const chords = p.lines
-      .map(l => l.items.map(item => item.chords))
-      .flat()
-      .filter(chord => chord !== "")
-      .filter(onlyUnique)
-      .filter(notDisplayed)
-
-    displayedChords.push(...chords)
-
-    return (
-      <div key={i} className="paragraph">
-        <div className="lines">
-          { p.lines.map(renderLine) }
-        </div>
-        <div className="visualChords">
-          { chords.map((chord, i) => <Chord key={i} name={chord} />) }
-        </div>
-      </div>
-    )
-  }
-
-  function renderLine(l,  i) {
-    return (
-      <table key={i} className="row">
-        <tbody>
-          <tr>
-            {
-              l.items.map((item, i) => {
-                return (
-                  <td key={i} className="chord">{item.chords}</td>
-                )
-              })
-            }
-          </tr>
-          <tr>
-            {
-              l.items.map((item, i) => {
-                return (
-                  <td key={i} className="lyrics">{item.lyrics}</td>
-                )
-              })
-            }
-          </tr>
-          
-        </tbody>
-      </table>
-    )
-  }
-
   return (
-    <div>
-      <h1>אני ואתה</h1>
-
-      { renderSong(song) }
-      <Chord name="E" />
-    </div>
+    <Song chordSheet={chordSheet} />
   )
 }
-
-export default Song
