@@ -7,9 +7,7 @@ export default function Song({title, chordSheet, rtl}) {
 
   const parser = new ChordSheetJS.ChordsOverWordsParser()
   const song = parser.parse(chordSheet)
-
-  const formatter = new ChordSheetJS.HtmlTableFormatter()
-  const disp = formatter.format(song)
+  const chordsPrinted = []
 
   function renderSong(song) {
     return (
@@ -24,49 +22,53 @@ export default function Song({title, chordSheet, rtl}) {
   }
 
   function renderParagraph(p, i) {
-    const chords = p.lines
-      .map(l => l.items.map(item => item.chords))
-      .flat()
-      .filter(chord => chord !== "")
-      .filter(onlyUnique)
-
     return (
       <div key={i} className={styles.paragraph}>
-        <div className={styles.lines}>
-          { p.lines.map(renderLine) }
-        </div>
-        <div className={styles.visualChords}>
-          { chords.map((chord, i) => <Chord key={i} name={chord} />) }
-        </div>
+        { p.lines.map(renderLine) }
       </div>
     )
   }
 
   function renderLine(l,  i) {
+
+    const chords = l.items
+      .map(item => item.chords)
+      .flat()
+      .filter(chord => chord !== "")
+      .filter(onlyUnique)
+      .filter(chord => chordsPrinted.indexOf(chord) ===  -1)
+
+    chordsPrinted.push(...chords)
+
     return (
-      <table key={i} className={styles.row}>
-        <tbody>
-          <tr>
-            {
-              l.items.map((item, i) => {
-                return (
-                  <td key={i} className={styles.chord}>{item.chords}</td>
-                )
-              })
-            }
-          </tr>
-          <tr>
-            {
-              l.items.map((item, i) => {
-                return (
-                  <td key={i} className={styles.lyrics}>{item.lyrics}</td>
-                )
-              })
-            }
-          </tr>
-          
-        </tbody>
-      </table>
+      <div className={styles.line}>
+        <table key={i} className={styles.table}>
+          <tbody>
+            <tr className={styles.chords}>
+              {
+                l.items.map((item, i) => {
+                  return (
+                    <td key={i} className={styles.chord}>{item.chords}</td>
+                  )
+                })
+              }
+            </tr>
+            <tr className={styles.text}>
+              {
+                l.items.map((item, i) => {
+                  return (
+                    <td key={i} className={styles.lyrics}>{item.lyrics}</td>
+                  )
+                })
+              }
+            </tr>
+            
+          </tbody>
+        </table>
+        <div className={styles.visualChords}>
+          { chords.map((chord, i) => <Chord key={i} name={chord} />) }
+        </div>
+      </div>
     )
   }
 
@@ -75,7 +77,6 @@ export default function Song({title, chordSheet, rtl}) {
       <h1>{title}</h1>
 
       { renderSong(song) }
-      <Chord name="E" />
     </div>
   )
 }

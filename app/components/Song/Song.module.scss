@@ -1,16 +1,43 @@
 .song {
 
+  h1 {
+    text-align: center;
+    line-height: 4em;
+  }
+
   .chordSheet {
+
+    border-radius: 20px;
+    background: #f0f0f0;
+    margin: 0 20px;
+    padding: 20px 40px;
     
     .paragraph {
       margin-bottom: 2em;
-      display: flex;
-      
-      .visualChords {
-        direction: ltr;
+
+      .line {
         display: flex;
-        flex-wrap: wrap;
-        justify-content: space-evenly;
+        width: 100%;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        .table {
+          .chords {
+            font-size: 14px;
+          }
+
+          .text {
+            font-size: 20px;
+          }
+        }
+      
+        .visualChords {
+          direction: ltr;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-evenly;
+        }
+
       }
     }
 
