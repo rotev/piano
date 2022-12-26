@@ -2,6 +2,7 @@ import ChordSheetJS from 'chordsheetjs'
 import classNames from 'classnames'
 import Chord from 'components/Chord'
 import styles from './Song.module.scss'
+import Paper from '@mui/material/Paper'
 
 export default function Song({title, chordSheet, rtl}) {
 
@@ -11,9 +12,9 @@ export default function Song({title, chordSheet, rtl}) {
 
   function renderSong(song) {
     return (
-      <div className={classNames(styles.chordSheet, {[styles.rtl]: rtl} )}>
+      <Paper elevation={3} className={classNames(styles.chordSheet, {[styles.rtl]: rtl} )}>
         { song.bodyParagraphs.map(renderParagraph) }
-      </div>
+      </Paper>
     )
   }
 
