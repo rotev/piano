@@ -1,6 +1,7 @@
 import ChordSheetJS from 'chordsheetjs'
 import classNames from 'classnames'
 import Chord from 'components/Chord'
+import SongHeader from 'components/SongHeader'
 import styles from './Song.module.scss'
 import Paper from '@mui/material/Paper'
 
@@ -75,7 +76,7 @@ export default function Song({title, chordSheet, rtl}) {
 
   return (
     <div className={styles.song}>
-      <h1>{title}</h1>
+      <SongHeader title={title} />
 
       { renderSong(song) }
     </div>
