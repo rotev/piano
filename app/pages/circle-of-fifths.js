@@ -7,9 +7,9 @@ export default function CircleOfFifths() {
         <h1>Circle of Fifths</h1>
       </header>
       <section className={styles.main}>
-        <div className={styles.circle}>
-          
-        </div>
+        <svg viewBox="0 0 100 100" className={styles.circle}>
+          <circle cx="50" cy="50" r="50" />
+        </svg>
       </section>
     </div>
   )

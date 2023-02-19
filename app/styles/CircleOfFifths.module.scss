@@ -36,10 +36,16 @@
   }
 
   .main {
+    flex-grow: 1;
 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: normal;
   }
 
   .circle {
-
+    height: 100%;
+    width: auto;
   }
 }
