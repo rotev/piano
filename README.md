@@ -1,5 +1,11 @@
 # piano
 
+## Development
+
+1. `cd app`
+2. `yarn`
+3. `yarn dev`
+
 ## Song data structure
 
 A future version might support a comprehensive system to synchronize lyrics, chord progression and audio, using a data structure similar to this:
