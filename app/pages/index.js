@@ -25,18 +25,26 @@ export async function getServerSideProps(context) {
     if (spotifyAuthToken) {
       loggedIn = true
       spotifyApi.setAccessToken(spotifyAuthToken)
+      var savedTracks = []
+      var hasMore = true
   
-      data = await spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE').then(
-        function(data) {
-          console.log('Artist albums', data.body);
-          return data.body;
-        },
-        function(err) {
-          console.error(err);
-          return err;
+      while(hasMore) {
+        var response = await spotifyApi.getMySavedTracks({
+            limit : 50,
+            offset: 1
+          })
+          .then(function(data) {
+            console.log(data.body);
+            return data.body
+          }, function(err) {
+            console.log('Something went wrong!', err);
+            return err.body
+          });
         }
-      )
+        savedTracks = savedTracks.concat(response.items)
+        hasMore = !!response.next
     }
+    data = savedTracks
   }
 
   return {
@@ -60,7 +68,7 @@ export default function Home({ spotifyClientId, spotifyAuthToken, loggedIn, data
         <SpotifyAuth
           redirectUri='http://127.0.0.1:3000'
           clientID={spotifyClientId}
-          scopes={[Scopes.userReadPrivate, Scopes.userReadEmail]}
+          scopes={[Scopes.userLibraryRead, Scopes.userReadPrivate, Scopes.userReadEmail]}
           onAccessToken={(token) => setToken(token)}
         />
       )}
