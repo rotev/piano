@@ -1,63 +1,74 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css';
+import React from 'react'
+import { SpotifyAuth, Scopes } from 'react-spotify-auth'
+import 'react-spotify-auth/dist/index.css' // if using the included styles
+import * as cookie from 'cookie'
+import styles from '../styles/Home.module.css'
 
-export default function Home() {
+var SpotifyWebApi = require('spotify-web-api-node');
+
+export async function getServerSideProps(context) {
+// credentials are optional
+  var spotifyApi = new SpotifyWebApi({
+    clientId: process.env.SPOTIFY_CLIENT_ID,
+    clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+    redirectUri: 'http://127.0.0.1:3000/'
+  });
+
+  const requestCookie = context.req.headers.cookie
+  var loggedIn = false
+  var spotifyAuthToken = null
+  var data = {}
+  if (requestCookie) {
+    const parsedCookies = cookie.parse(requestCookie);
+  
+    spotifyAuthToken = parsedCookies.spotifyAuthToken
+    if (spotifyAuthToken) {
+      loggedIn = true
+      spotifyApi.setAccessToken(spotifyAuthToken)
+  
+      data = await spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE').then(
+        function(data) {
+          console.log('Artist albums', data.body);
+          return data.body;
+        },
+        function(err) {
+          console.error(err);
+          return err;
+        }
+      )
+    }
+  }
+
+  return {
+    props: {
+      spotifyClientId: process.env.SPOTIFY_CLIENT_ID,
+      loggedIn: loggedIn,
+      spotifyAuthToken: spotifyAuthToken,
+      data: data
+    }
+  }
+}
+
+export default function Home({ spotifyClientId, spotifyAuthToken, loggedIn, data }) {
+  const [token, setToken] = React.useState(spotifyAuthToken)
+
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      {loggedIn ? (
+          <div>hello</div>
+        ) : (
+        <SpotifyAuth
+          redirectUri='http://127.0.0.1:3000'
+          clientID={spotifyClientId}
+          scopes={[Scopes.userReadPrivate, Scopes.userReadEmail]}
+          onAccessToken={(token) => setToken(token)}
+        />
+      )}
 
       <main>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
       </main>
 
       <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel" className={styles.logo} />
-        </a>
       </footer>
 
       <style jsx>{`
