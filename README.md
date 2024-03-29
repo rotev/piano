@@ -1,5 +1,17 @@
 # piano
 
+## Development
+
+1. Start a Codespace.
+2. `cd app`
+3. `yarn dev`
+4. Open http://localhost:3000.
+
+Example Hebrew song: [אני ואתה](http://127.0.0.1:3000/songs/you-and-me).
+
+Example English song: [My Favorite Things](http://127.0.0.1:3000/songs/my-favorite-things).
+
+
 ## Song data structure
 
 A future version might support a comprehensive system to synchronize lyrics, chord progression and audio, using a data structure similar to this:
