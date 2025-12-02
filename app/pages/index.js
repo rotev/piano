@@ -1,8 +1,7 @@
 import React from 'react'
-import { SpotifyAuth, Scopes } from 'react-spotify-auth'
-import 'react-spotify-auth/dist/index.css' // if using the included styles
 import * as cookie from 'cookie'
 import styles from '../styles/Home.module.css'
+import SpotifyAuthButton from '../components/SpotifyAuthButton'
 
 var SpotifyWebApi = require('spotify-web-api-node');
 
@@ -57,6 +56,8 @@ export async function getServerSideProps(context) {
   }
 }
 
+const SPOTIFY_SCOPES = ['user-library-read', 'user-read-private', 'user-read-email']
+
 export default function Home({ spotifyClientId, spotifyAuthToken, loggedIn, data }) {
   const [token, setToken] = React.useState(spotifyAuthToken)
 
@@ -65,11 +66,11 @@ export default function Home({ spotifyClientId, spotifyAuthToken, loggedIn, data
       {loggedIn ? (
           <div>hello</div>
         ) : (
-        <SpotifyAuth
+        <SpotifyAuthButton
           redirectUri='http://127.0.0.1:3000'
-          clientID={spotifyClientId}
-          scopes={[Scopes.userLibraryRead, Scopes.userReadPrivate, Scopes.userReadEmail]}
-          onAccessToken={(token) => setToken(token)}
+          clientId={spotifyClientId}
+          scopes={SPOTIFY_SCOPES}
+          onAccessToken={(value) => setToken(value)}
         />
       )}
 
